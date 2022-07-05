@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "jugabanqr-scan",
-    "slug": "jugabanqr-scan",
+    "name": "lgu-jaro-app",
+    "slug": "lgu-jaro-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,6 +20,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package" : "com.lgujaro.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
