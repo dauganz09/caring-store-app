@@ -1,47 +1,59 @@
-import { StyleSheet, Text, View,TextInput, TouchableOpacity,Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,TextInput, TouchableOpacity,Image, Pressable } from 'react-native'
+import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import axios from '../utils/axios';
+import {axios1} from '../utils/axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import bg from '../assets/jaro.png';
-import Toast from 'react-native-toast-message';
+import bg from '../assets/logo_caring.png';
+import { useToast } from "react-native-toast-notifications";
 import Svg, { Path } from "react-native-svg";
 import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function Login({navigation}) {
-
-    const [username, setUsername] = React.useState('');
+    const toast = useToast();
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    
 
     
+  
 
     const userLogin = async () => {
-        const res = axios.post('login', {
-            username,
+        const res = axios1.post('login', {
+            email,
             password
         });
         const result = await res;
         console.log(result);
        
-        if(!result == false){
-            Toast.show({
-                type: 'success',
-                text1: 'Login Success!',
-               
-              });
+        if(!result.data == false){
+          toast.show("Login Successfully!", {
+            type: "success",
+            placement: "bottom",
+            duration: 2000,
+            offset: 30,
+            animationType: "slide-in",
+          });
             const {data} = result;
             
               console.log(data);
-            AsyncStorage.setItem('employee_id',data.employee_id);
-            AsyncStorage.setItem('pass',data.dpass);
+            AsyncStorage.setItem('user_id',data.user_id);
+            AsyncStorage.setItem('fullname',data.fullname);
+            AsyncStorage.setItem('email',data.email);
+
+            AsyncStorage.setItem('pass',data.cpass);
+            AsyncStorage.setItem('isLogin',1);
 
             
-            navigation.navigate('Home')
+            navigation.navigate('Dashboard')
            
         }else{
-            console.log('error');
+          toast.show("Invalid Credentials!", {
+            type: "danger",
+            placement: "bottom",
+            duration: 2000,
+            offset: 30,
+            animationType: "slide-in",
+          });
         }
 
     }
@@ -61,30 +73,26 @@ export default function Login({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient 
-      colors={['rgba(94,206,228,1)','rgba(0,138,255,1)','rgba(98,100,232,1)']}
-      locations={[.1,.47,.83]}
-      style={{height : '100vh', position : 'absolute',alignItems : 'center',justifyContent : 'center'}}
-      >
+      
        
        <Image 
         source = {bg}
-        style = {{width : '100%', height : 350,position : 'absolute',top: 0,left:0}}
+        style = {{width : 200, height : 200,}}
          />
-      <Text style={styles.title}>LGU- Contract Tracing App</Text>
-      <Text style={[styles.login_text,{marginBottom : 20}]}>User Login</Text>
+     
       <View style={styles.login_box}>
-        <Text style={styles.login_text}>Employee No.</Text>
-        <TextInput name='empno' value={username} onChangeText={setUsername} style={styles.login_input} />
+        <Text style={styles.login_text}>Email</Text>
+        <TextInput  value={email} onChangeText={setEmail} style={styles.login_input} />
         
         <Text style={styles.login_text}>Password</Text>
-        <TextInput name='pass'  value={password} secureTextEntry={true} onChangeText={setPassword} style={styles.login_input} />
+        <TextInput  value={password} secureTextEntry={true} onChangeText={setPassword} style={styles.login_input} />
         <TouchableOpacity onPress={userLogin} style={styles.login_button}>
             <Text style={styles.login_button_text}>Login</Text>
         </TouchableOpacity>
+        <Text style={styles.smallText}>Dont't have an account? <TouchableOpacity onPress={()=>navigation.navigate('Signup')}><Text  style={styles.signUp}>Sign Up</Text></TouchableOpacity></Text>
            
       </View>
-      </LinearGradient>
+     
     </SafeAreaView>
   )
 }
@@ -96,6 +104,7 @@ const styles = StyleSheet.create({
         
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor : "white"
       },
       title: {
         width : '100vw',
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
         fontSize : 20,
         marginTop : 5,
         fontWeight : 'bold',
-        color : '#DBDFFD',
+        color : 'black',
         textTransform : 'uppercase',
 
       },
@@ -137,7 +146,7 @@ const styles = StyleSheet.create({
             borderRadius : 5,
             marginTop : 10,
             paddingLeft : 10,
-            color : 'white',
+            color : 'black',
             fontSize : 20,
             fontWeight : 'bold',
            
@@ -157,7 +166,7 @@ const styles = StyleSheet.create({
             fontSize : 20,
             fontWeight : 'bold',
             textTransform : 'uppercase',
-            backgroundColor : '#646FD4',
+            backgroundColor : '#4649FF',
            
 
         },
@@ -167,5 +176,14 @@ const styles = StyleSheet.create({
             color : 'white',
             textTransform : 'uppercase',
 
+        },
+        smallText : {
+          marginTop : 10,
+          fontSize : 16,
+          fontWeight : "bold",
+          color : 'black',
+        },
+        signUp : {
+          color : "blue"
         }
 })

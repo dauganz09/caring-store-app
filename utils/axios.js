@@ -1,11 +1,24 @@
 import axios from 'axios';
 
 
-export default axios.create({
-    baseURL: 'http://192.168.1.6/lgu-cts/api/',
+const axios1 = axios.create({
+    baseURL: 'https://caringstore.xyz/api/',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
+
+const axios2 = axios.create({
+    baseURL: 'https://lobster-app-f4kw6.ondigitalocean.app/',
     headers: {
         'Content-Type': 'application/json',
     },
 
-
 });
+
+
+export {
+    axios1,
+    axios2
+  };
+

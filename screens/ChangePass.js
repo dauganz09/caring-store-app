@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View,TextInput, TouchableOpacity } from 'react-native'
 import React,{useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import axios from '../utils/axios';
+import {axios1} from '../utils/axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Toast from 'react-native-toast-message';

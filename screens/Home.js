@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,Vibration,SafeAreaView,TouchableOpacity } from 'react-native';
+import { ImageBackground,StyleSheet, Text, View,Vibration,SafeAreaView,TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from '../utils/axios';
-
+import bg from '../assets/bgimage.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useStore from '../utils/appStore';
 import Toast from 'react-native-toast-message';
@@ -36,27 +36,32 @@ export default function Home({navigation}) {
   
     return (
         <SafeAreaView style={styles.container}>
+          <ImageBackground source={bg} style={styles.image}>
        
-       
-                <View>
-                    <Text style={styles.heading}>Dashboard</Text>
-                </View>
+               
 
               <View style={styles.btnContainer}>
              
 
-               <TouchableOpacity onPress={() =>navigation.navigate('Scan')}  style={styles.login_button}>
-                  <Text style={styles.login_button_text}>Scan QR</Text>
+               <TouchableOpacity onPress={()=> navigation.navigate('Questions',{ name: 'Accessibility',code : 1})}  style={styles.login_button}>
+                  <Text style={styles.login_button_text}>Accessibility</Text>
                </TouchableOpacity>
 
-               <TouchableOpacity onPress={()=> navigation.navigate('ChangePass')}  style={styles.login_button}>
-                  <Text style={styles.login_button_text}>Change Password</Text>
+               <TouchableOpacity onPress={()=> navigation.navigate('Questions',{ name: 'Empathy',code : 2 })}  style={styles.login_button}>
+                  <Text style={styles.login_button_text}>Empathy</Text>
+               </TouchableOpacity>
+
+               <TouchableOpacity onPress={()=> navigation.navigate('Questions',{ name: 'Response Time',code : 3 })} style={styles.login_button}>
+                  <Text style={styles.login_button_text}>Response Time</Text>
+               </TouchableOpacity>
+
+               <TouchableOpacity onPress={()=> navigation.navigate('Questions',{ name: 'Loyal Programs',code : 4 })}  style={styles.login_button}>
+                  <Text style={styles.login_button_text}>Loyal Programs</Text>
                </TouchableOpacity>
 
               </View>
                
-              
-  
+              </ImageBackground>
    
        </SafeAreaView>
     );
@@ -64,14 +69,20 @@ export default function Home({navigation}) {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#242F9B',
+      backgroundColor: 'black',
       flex: 1,
       
       alignItems: 'center',
       
       display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
+      flexDirection: 'column',
+      justifyContent: 'space-around',
+    },
+    image: {
+      width : '100%',
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
     },
     btnContainer : {
         display : 'flex',

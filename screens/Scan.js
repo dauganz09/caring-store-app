@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,Vibration } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import axios from '../utils/axios';
+import {axios1} from '../utils/axios';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useStore from '../utils/appStore';

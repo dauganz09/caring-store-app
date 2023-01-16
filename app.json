@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "lgu-jaro-app",
-    "slug": "lgu-jaro-app",
+    "name": "caring-store-app",
+    "slug": "caring-store-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package" : "com.lgujaro.app",
+      "package": "com.caringstore.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +28,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a9deeb0b-c374-45d7-8129-4409604b5264"
+      }
     }
   }
 }
