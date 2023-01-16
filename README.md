@@ -1,4 +1,4 @@
-# jaro-app
+# caring-store-app
 
 
-The Employee mobile application fo the LGU Jaro Contact Tracing system application.
+A sentiment classifier mogile application for customer reviews of the caring store.
